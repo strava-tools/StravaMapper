@@ -123,8 +123,8 @@ importers:
         specifier: ^2.2.2
         version: 2.6.1
       tailwind-variants:
-        specifier: ^0.2.0
-        version: 0.2.1(tailwindcss@3.4.19)
+        specifier: ^1.0.0
+        version: 1.0.0(tailwindcss@3.4.19)
     devDependencies:
       '@evilmartians/lefthook':
         specifier: ^1.6.7
@@ -5321,8 +5321,11 @@ packages:
   tailwind-merge@2.6.1:
     resolution: {integrity: sha512-Oo6tHdpZsGpkKG88HJ8RR1rg/RdnEkQEfMoEk2x1XRI3F1AxeU+ijRXpiVUF4UbLfcxxRGw6TbUINKYdWVsQTQ==}
 
-  tailwind-variants@0.2.1:
-    resolution: {integrity: sha512-2xmhAf4UIc3PijOUcJPA1LP4AbxhpcHuHM2C26xM0k81r0maAO6uoUSHl3APmvHZcY5cZCY/bYuJdfFa4eGoaw==}
+  tailwind-merge@3.0.2:
+    resolution: {integrity: sha512-l7z+OYZ7mu3DTqrL88RiKrKIqO3NcpEO8V/Od04bNpvk0kiIFndGEoqfuzvj4yuhRkHKjRkII2z+KS2HfPcSxw==}
+
+  tailwind-variants@1.0.0:
+    resolution: {integrity: sha512-2WSbv4ulEEyuBKomOunut65D8UZwxrHoRfYnxGcQNnHqlSCp2+B7Yz2W+yrNDrxRodOXtGD/1oCcKGNBnUqMqA==}
     engines: {node: '>=16.x', pnpm: '>=7.x'}
     peerDependencies:
       tailwindcss: '*'
@@ -11809,9 +11812,11 @@ snapshots:
 
   tailwind-merge@2.6.1: {}
 
-  tailwind-variants@0.2.1(tailwindcss@3.4.19):
+  tailwind-merge@3.0.2: {}
+
+  tailwind-variants@1.0.0(tailwindcss@3.4.19):
     dependencies:
-      tailwind-merge: 2.6.1
+      tailwind-merge: 3.0.2
       tailwindcss: 3.4.19
 
   tailwindcss@3.4.19:
