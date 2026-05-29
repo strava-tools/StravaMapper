@@ -29,6 +29,7 @@
 	let MaplibreExportControl: any, Size: any, PageOrientation: any, Format: any, DPI: any;
 	let measureControl: SvelteComponentTyped, exportControl: IControl;
 	let layerControlOpen: boolean = false;
+	let geolocateControlAvailable: boolean = false;
 
 	// Configure Map Baselayers
 	let styles = [
@@ -141,6 +142,11 @@
 		Format = exportModule.Format;
 		DPI = exportModule.DPI;
 
+		geolocateControlAvailable =
+			typeof navigator !== 'undefined' &&
+			typeof navigator.permissions?.query === 'function' &&
+			!!navigator.geolocation;
+
 		if ($mode) {
 			if ($mode == 'dark') {
 				selectedStyle = styles[1];
@@ -185,7 +191,9 @@
 	style={selectedStyle.uri}
 >
 	<NavigationControl position="top-left" />
-	<GeolocateControl position="top-right" fitBoundsOptions={{ maxZoom: 12 }} />
+	{#if geolocateControlAvailable}
+		<GeolocateControl position="top-right" fitBoundsOptions={{ maxZoom: 12 }} />
+	{/if}
 	<FullscreenControl position="top-left" />
 	<ScaleControl />
 	<AttributionControl
