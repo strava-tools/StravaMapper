@@ -12,6 +12,7 @@
 	import ErrorNotice from '$lib/components/Error.svelte';
 	import '$lib/components/sidebar/svg-styles.css';
 	import '$lib/activities';
+	import { getFastGeoHeatmapColor } from '$lib/components/sidebar/fastGeoHeatmap';
 
 	import { Head } from '$lib/components/ui/table';
 	import type { StravaActivity } from '$lib/activities';
@@ -20,7 +21,7 @@
 	import type Map from '$lib/components/map/Map.svelte';
 	import polyline from '@mapbox/polyline';
 	import maplibregl from 'maplibre-gl';
-	import { Deck } from '@deck.gl/core';
+	import { processPolylines } from 'fastgeotoolkit';
 	import { MapboxOverlay as DeckOverlay } from '@deck.gl/mapbox';
 	import { GeoJsonLayer } from '@deck.gl/layers';
 
@@ -32,6 +33,7 @@
 	let dateRangeMinFilter: string;
 	let dateRangeMaxFilter: string;
 	let showPrivate: boolean;
+	let useFastGeoToolkitHeatmap: boolean = true;
 
 	let mapLoaded: boolean = false;
 	let activities: StravaActivity[] = [];
@@ -45,6 +47,52 @@
 	let coordsFlat: any = [];
 	let startIconEl: HTMLImageElement, endIconEl: HTMLImageElement;
 	let loading: boolean = true;
+	let fastGeoHeatmapLayer: any = null;
+
+	async function buildFastGeoHeatmapLayer() {
+		const encodedPolylines = activities
+			.map((activity) => activity.map?.summary_polyline)
+			.filter((value): value is string => typeof value === 'string' && value.length > 0);
+
+		if (encodedPolylines.length === 0) {
+			fastGeoHeatmapLayer = null;
+			return;
+		}
+
+		try {
+			const heatmapResult = await processPolylines(encodedPolylines);
+			const maxFrequency = Math.max(1, heatmapResult.max_frequency || 1);
+			const geojson = {
+				type: 'FeatureCollection',
+				features: heatmapResult.tracks.map((track: any) => ({
+					type: 'Feature',
+					properties: { frequency: track.frequency },
+					geometry: {
+						type: 'LineString',
+						coordinates: track.coordinates.map((coord: number[]) => [coord[1], coord[0]])
+					}
+				}))
+			};
+
+			fastGeoHeatmapLayer = new GeoJsonLayer({
+				id: 'fastgeotoolkit-heatmap',
+				data: geojson as any,
+				pickable: true,
+				stroked: true,
+				filled: false,
+				lineCapRounded: true,
+				lineJointRounded: true,
+				lineWidthMinPixels: 2,
+				getLineColor: (feature: any) =>
+					getFastGeoHeatmapColor(feature.properties?.frequency ?? 1, maxFrequency),
+				getLineWidth: (feature: any) => Math.min(10, 1 + (feature.properties?.frequency ?? 1) * 0.8),
+				opacity: 0.85
+			});
+		} catch (heatmapError) {
+			console.error('Failed to build fastgeotoolkit heatmap', heatmapError);
+			fastGeoHeatmapLayer = null;
+		}
+	}
 
 	async function getActivities() {
 		try {
@@ -102,6 +150,7 @@
 				localStorage.setItem('activities', JSON.stringify(activities));
 				localStorage.setItem('heatmapCoords', JSON.stringify(heatmapCoords));
 				localStorage.setItem('allGeojsonFeatures', JSON.stringify(allGeojsonFeatures));
+				await buildFastGeoHeatmapLayer();
 			} else {
 				console.error('No access token found in session data. Reload page and try again.');
 			}
@@ -158,18 +207,26 @@
 			}
 		}
 	}
+	$: if (activities.length > 0 && !fastGeoHeatmapLayer) {
+		void buildFastGeoHeatmapLayer();
+	}
 	$: if (map) {
 		map.on('load', () => {
 			mapLoaded = true;
 		});
 	}
 	$: if (map && mapLoaded && geoJsonData) {
+		const selectedLayers =
+			useFastGeoToolkitHeatmap && fastGeoHeatmapLayer ? [fastGeoHeatmapLayer] : [...geoJsonData];
+
 		if (!visualizationDeck) {
 			console.log('geojsondata', geoJsonData);
 			visualizationDeck = new DeckOverlay({
-				layers: [...geoJsonData]
+				layers: selectedLayers
 			});
 			map.addControl(visualizationDeck);
+		} else {
+			visualizationDeck.setProps({ layers: selectedLayers });
 		}
 	}
 </script>
@@ -212,6 +269,7 @@
 			bind:dateRangeMinFilter
 			bind:dateRangeMaxFilter
 			bind:showPrivate
+			bind:useFastGeoToolkitHeatmap
 		/>
 		<Separator class="mt-3 mx-5 w-[calc(100vw-2.5rem)] md:w-auto" />
 		<ActivityTable activityData={activities} />

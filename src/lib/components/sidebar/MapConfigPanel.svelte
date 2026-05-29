@@ -18,6 +18,7 @@
 	export let dateRangeMinFilter: string;
 	export let dateRangeMaxFilter: string;
 	export let showPrivate: boolean = true;
+	export let useFastGeoToolkitHeatmap: boolean = true;
 </script>
 
 <div class="w-full px-6 flex flex-col gap-3">
@@ -35,6 +36,18 @@
 		<Switch
 			id="private-activities"
 			bind:checked={showPrivate}
+			class="data-[state=checked]:bg-secondary"
+		/>
+	</div>
+	<div class="pl-2 pt-s1">
+		<Label
+			for="fastgeotoolkit-heatmap"
+			class="bottom-1 pr-1 relative select-none text-sm font-medium"
+			>Use fastgeotoolkit Heatmap</Label
+		>
+		<Switch
+			id="fastgeotoolkit-heatmap"
+			bind:checked={useFastGeoToolkitHeatmap}
 			class="data-[state=checked]:bg-secondary"
 		/>
 	</div>
