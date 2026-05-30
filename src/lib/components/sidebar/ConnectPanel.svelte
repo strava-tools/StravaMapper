@@ -1,6 +1,5 @@
 <script lang="ts">
 	import * as Card from '$lib/components/ui/card';
-	import Button from '$lib/components/ui/button/button.svelte';
 	import * as Alert from '$lib/components/ui/alert'; // @ts-expect-error: this import does exist
 	import { signIn } from '@auth/sveltekit/client';
 	import '$lib/components/sidebar/svg-styles.css';
@@ -23,12 +22,13 @@
 		{/if}
 	</Card.Header>
 	<Card.Content>
-		<Button
+		<a
 			class="bg-[#FC4C02] hover:bg-[#d14002] flex items-center mx-auto px-0 h-10 my-3"
-			on:click={() => signIn('strava')}
+			href="/auth/signin/strava"
+			on:click|preventDefault={() => signIn('strava')}
 		>
 			<img src="img/icon/connect_with_strava.svg" alt="Connect with Strava" class="h-14" />
-		</Button>
+		</a>
 	</Card.Content>
 	<Card.Footer>
 		<Alert.Root>
