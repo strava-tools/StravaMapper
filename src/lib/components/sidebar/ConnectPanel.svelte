@@ -27,7 +27,7 @@
 			href="/auth/signin/strava"
 			on:click|preventDefault={() => signIn('strava')}
 			on:keydown={(event) => {
-				if (event.key === 'Enter' || event.key === ' ') {
+				if (event.key === 'Enter') {
 					event.preventDefault();
 					signIn('strava');
 				}
