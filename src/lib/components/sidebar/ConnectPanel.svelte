@@ -22,13 +22,15 @@
 		{/if}
 	</Card.Header>
 	<Card.Content>
-		<a
-			class="bg-[#FC4C02] hover:bg-[#d14002] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring flex items-center mx-auto px-0 h-10 my-3"
-			href="/auth/signin/strava"
-			on:click|preventDefault={() => signIn('strava')}
-		>
-			<img src="img/icon/connect_with_strava.svg" alt="Connect with Strava" class="h-14" />
-		</a>
+		<form action="/auth/signin/strava" method="get">
+			<button
+				type="submit"
+				class="bg-[#FC4C02] hover:bg-[#d14002] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring flex items-center mx-auto px-0 h-10 my-3"
+				on:click|preventDefault={() => signIn('strava')}
+			>
+				<img src="img/icon/connect_with_strava.svg" alt="Connect with Strava" class="h-14" />
+			</button>
+		</form>
 	</Card.Content>
 	<Card.Footer>
 		<Alert.Root>
