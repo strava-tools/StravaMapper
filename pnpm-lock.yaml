@@ -45,8 +45,8 @@ importers:
         specifier: ^1.1.0
         version: 1.2.0(mapbox-gl@3.24.0)
       '@mapbox-controls/styles':
-        specifier: ^1.1.0
-        version: 1.2.0(mapbox-gl@3.24.0)
+        specifier: ^3.0.0
+        version: 3.0.0(mapbox-gl@3.24.0)
       '@mapbox/polyline':
         specifier: ^1.2.1
         version: 1.2.1
@@ -1503,13 +1503,18 @@ packages:
     peerDependencies:
       mapbox-gl: '>=1.0.0 <4.0.0'
 
+  '@mapbox-controls/helpers@3.0.0':
+    resolution: {integrity: sha512-XxCCKHNaxR8WeJM3syiXxBH/7Yfz7WytnDvhe/aQMgxYhJ68Z9aKAu6E4PtV0AI5dxyQb6UkdhQs8mg7Py0tjA==}
+    peerDependencies:
+      mapbox-gl: '>=1.0.0 <4.0.0'
+
   '@mapbox-controls/ruler@1.2.0':
     resolution: {integrity: sha512-8iLOxmJWjs7MuSevsZEmlFQnCCU5GehxtTaCZ6gaj8n8n5OKsYcph2hQug4aCcipAS9DuJ+OAuXWsctsUCbVDQ==}
     peerDependencies:
       mapbox-gl: '>=1.0.0 <4.0.0'
 
-  '@mapbox-controls/styles@1.2.0':
-    resolution: {integrity: sha512-AOn5DAErO9WfU1QqqyVp1qYjqlFdEwSW3QEOPm0v84bobplPlNVl2B+JC5LPWYWYQZfXXDDKO+/28vjDmBPacA==}
+  '@mapbox-controls/styles@3.0.0':
+    resolution: {integrity: sha512-eOjVPhsdIJ54SjhSwlbnVHcrdU53U4mZWbZeA7ewb6BtjlGnwJJM2TaYZhA2dQB++XUDhjUwtjYtedWnXqvkiQ==}
     peerDependencies:
       mapbox-gl: '>=1.0.0 <4.0.0'
 
@@ -7055,6 +7060,10 @@ snapshots:
     dependencies:
       mapbox-gl: 3.24.0
 
+  '@mapbox-controls/helpers@3.0.0(mapbox-gl@3.24.0)':
+    dependencies:
+      mapbox-gl: 3.24.0
+
   '@mapbox-controls/ruler@1.2.0(mapbox-gl@3.24.0)':
     dependencies:
       '@mapbox-controls/helpers': 1.1.0(mapbox-gl@3.24.0)
@@ -7062,9 +7071,9 @@ snapshots:
       '@turf/helpers': 7.0.0-alpha.2
       mapbox-gl: 3.24.0
 
-  '@mapbox-controls/styles@1.2.0(mapbox-gl@3.24.0)':
+  '@mapbox-controls/styles@3.0.0(mapbox-gl@3.24.0)':
     dependencies:
-      '@mapbox-controls/helpers': 1.1.0(mapbox-gl@3.24.0)
+      '@mapbox-controls/helpers': 3.0.0(mapbox-gl@3.24.0)
       mapbox-gl: 3.24.0
 
   '@mapbox/geojson-area@0.2.2':
