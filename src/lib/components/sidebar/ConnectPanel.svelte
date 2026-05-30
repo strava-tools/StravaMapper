@@ -30,6 +30,7 @@
 			<button
 				type="submit"
 				class="bg-[#FC4C02] hover:bg-[#d14002] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-offset-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 flex items-center mx-auto px-0 h-10 my-3"
+				aria-label="Connect with Strava"
 			>
 				<img src="img/icon/connect_with_strava.svg" alt="Connect with Strava" class="h-14" />
 			</button>
