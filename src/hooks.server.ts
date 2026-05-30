@@ -13,12 +13,13 @@ const contentSecurityPolicy = [
 
 const securityHeaders: Handle = async ({ event, resolve }) => {
 	const response = await resolve(event);
+	const securedResponse = new Response(response.body, response);
 
-	response.headers.set('X-Content-Type-Options', 'nosniff');
-	response.headers.set('X-Frame-Options', 'DENY');
-	response.headers.set('Content-Security-Policy', contentSecurityPolicy);
+	securedResponse.headers.set('X-Content-Type-Options', 'nosniff');
+	securedResponse.headers.set('X-Frame-Options', 'DENY');
+	securedResponse.headers.set('Content-Security-Policy', contentSecurityPolicy);
 
-	return response;
+	return securedResponse;
 };
 
 export const handle = sequence(securityHeaders, authHandle);
