@@ -23,16 +23,9 @@
 	</Card.Header>
 	<Card.Content>
 		<a
-			class="bg-[#FC4C02] hover:bg-[#d14002] flex items-center mx-auto px-0 h-10 my-3"
+			class="bg-[#FC4C02] hover:bg-[#d14002] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring flex items-center mx-auto px-0 h-10 my-3"
 			href="/auth/signin/strava"
 			on:click|preventDefault={() => signIn('strava')}
-			on:keydown={(event) => {
-				if (event.key === 'Enter') {
-					event.preventDefault();
-					signIn('strava');
-				}
-			}}
-			role="button"
 		>
 			<img src="img/icon/connect_with_strava.svg" alt="Connect with Strava" class="h-14" />
 		</a>
