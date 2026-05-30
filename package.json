@@ -83,7 +83,7 @@
 		"lucide-svelte": "^0.358.0",
 		"maplibre-gl": "^3.6.2",
 		"mode-watcher": "^0.3.0",
-		"paneforge": "^0.0.2",
+		"paneforge": "^0.0.6",
 		"svelte-loading-spinners": "^0.3.4",
 		"svelte-maplibre": "^0.8.2",
 		"svelte-radix": "^1.1.0",

@@ -105,8 +105,8 @@ importers:
         specifier: ^0.3.0
         version: 0.3.1(svelte@4.2.20)
       paneforge:
-        specifier: ^0.0.2
-        version: 0.0.2(svelte@4.2.20)
+        specifier: ^0.0.6
+        version: 0.0.6(svelte@4.2.20)
       svelte-loading-spinners:
         specifier: ^0.3.4
         version: 0.3.6
@@ -4522,10 +4522,10 @@ packages:
   pako@2.1.0:
     resolution: {integrity: sha512-w+eufiZ1WuJYgPXbV/PO3NCMEc3xqylkKHzp8bxp1uW4qaSNQUkwmLLEc3kKsfz8lpV1F8Ht3U1Cm+9Srog2ug==}
 
-  paneforge@0.0.2:
-    resolution: {integrity: sha512-1xNMq+uslstqum4D8CzzkPGqnTWUlevjYtMjUhuEOiuz7E0fJHFuM8ogk8+LJnVbAg3hMJJ/9Mu4A1KaxK38oQ==}
+  paneforge@0.0.6:
+    resolution: {integrity: sha512-jYeN/wdREihja5c6nK3S5jritDQ+EbCqC5NrDo97qCZzZ9GkmEcN5C0ZCjF4nmhBwkDKr6tLIgz4QUKWxLXjAw==}
     peerDependencies:
-      svelte: ^4.0.0
+      svelte: ^4.0.0 || ^5.0.0-next.1
 
   parent-module@1.0.1:
     resolution: {integrity: sha512-GQ2EWRpQV8/o+Aw8YqtfZZPfNRWZYkbidE9k5rpl/hC3vtHHBfGm2Ifi6qWV+coDGkrUKZAxE3Lot5kcsRlh+g==}
@@ -10998,7 +10998,7 @@ snapshots:
 
   pako@2.1.0: {}
 
-  paneforge@0.0.2(svelte@4.2.20):
+  paneforge@0.0.6(svelte@4.2.20):
     dependencies:
       nanoid: 5.1.11
       svelte: 4.2.20
